@@ -1,0 +1,33 @@
+﻿<Page x:Class="demik3.AddPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:demik3"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="1200"
+      Title="AddPage">
+
+    <Grid Background="GhostWhite">
+        <StackPanel Orientation="Vertical" Margin="276,0,281,0">
+            <StackPanel Orientation="Horizontal" Margin="0,100,0,0">
+                <TextBlock  FontSize="40" Text="Название"></TextBlock>
+                <TextBox x:Name="nametxt" Margin="20,0,0,0" Width="435"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,100,0,0">
+                <TextBlock  FontSize="40" Text="Картинка"></TextBlock>
+                <TextBox x:Name="imagetxt" Margin="27,0,0,0" Width="437"></TextBox>
+                
+            </StackPanel>
+            <ComboBox  x:Name="colorcmb" Margin="194,40,10,0" Height="60">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock FontSize="40" Text="{Binding Name}"></TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Button x:Name="AddBtn" Content="Добавить" Margin="202,70,109,0" Background="LightBlue" FontSize="50" Style="{DynamicResource RadioButton}" Height="80" Click="AddBtn_Click"></Button>
+        </StackPanel>
+        
+    </Grid>
+</Page>

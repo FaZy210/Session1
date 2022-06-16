@@ -1,0 +1,35 @@
+﻿<Page x:Class="demik3.ListPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:demik3"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="1200"
+      Title="ListPage">
+    <ScrollViewer>
+        
+    <Grid Background="GhostWhite">
+        <StackPanel>
+            <ListView x:Name="listknives">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            
+                            <StackPanel>
+                                <Image Source="{Binding Image}" Height="80" Width="80"></Image>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical">
+
+                                <TextBlock Text="{Binding Name}" FontSize="40"></TextBlock>
+                                    <TextBlock Text="{Binding color.Name}" FontSize="40"></TextBlock>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+        
+    </Grid>
+    </ScrollViewer>
+</Page>

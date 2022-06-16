@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище knivesModelContainer" CdmEntityContainer="knivesEntities1">
+    <EntitySetMapping Name="clients">
+      <EntityTypeMapping TypeName="knivesModel.client">
+        <MappingFragment StoreEntitySet="clients">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Login" ColumnName="Login" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="roleId" ColumnName="roleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="colors">
+      <EntityTypeMapping TypeName="knivesModel.color">
+        <MappingFragment StoreEntitySet="colors">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="knives">
+      <EntityTypeMapping TypeName="knivesModel.knife">
+        <MappingFragment StoreEntitySet="knife">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="IdColor" ColumnName="IdColor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="purchases">
+      <EntityTypeMapping TypeName="knivesModel.purchase">
+        <MappingFragment StoreEntitySet="purchase">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="knifeId" ColumnName="knifeId" />
+          <ScalarProperty Name="clientId" ColumnName="clientId" />
+          <ScalarProperty Name="colorId" ColumnName="colorId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="roles">
+      <EntityTypeMapping TypeName="knivesModel.role">
+        <MappingFragment StoreEntitySet="roles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

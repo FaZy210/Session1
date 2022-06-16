@@ -1,0 +1,29 @@
+﻿<Page x:Class="demik3.RegistrationPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:demik3"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="1200"
+      Title="RegistrationPage">
+
+    <Grid Background="GhostWhite">
+        <StackPanel Orientation="Vertical">
+            <TextBlock Text="Регистрация" HorizontalAlignment="Center" FontSize="60"></TextBlock>
+            <StackPanel Orientation="Horizontal" Margin="310,150,300,0" >
+                <TextBlock Text="Логин:" FontSize="40"></TextBlock>
+                <TextBox x:Name="logtxt" Margin="35,0,10,0" Width="428" FontSize="40"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="310,20,300,0" >
+                <TextBlock Text="Пароль:" FontSize="40"></TextBlock>
+                <TextBox x:Name="pastxt" Margin="10,0,0,0" Width="426" FontSize="40"></TextBox>
+
+            </StackPanel>
+            <Button x:Name="RegistrButton" Content="Зарегистрироваться" Margin="467,20,308,0" Height="54" Background="LightBlue" Style="{DynamicResource RadioButton}" Click="JoinButton_Click"/>
+            <Button x:Name="BackButton" Content="Назад" Margin="467,20,308,0" Height="54" Background="LightBlue" Style="{DynamicResource RadioButton}" Click="RegistrButton_Click"/>
+        </StackPanel>
+
+
+    </Grid>
+</Page>

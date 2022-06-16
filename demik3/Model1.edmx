@@ -1,0 +1,320 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище knivesModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="clients">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="roleId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="colors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="knife">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Image" Type="nvarchar" MaxLength="100" />
+          <Property Name="IdColor" Type="int" />
+        </EntityType>
+        <EntityType Name="purchase">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="knifeId" Type="int" Nullable="false" />
+          <Property Name="clientId" Type="int" Nullable="false" />
+          <Property Name="colorId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="roles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_clients_roles">
+          <End Role="roles" Type="Self.roles" Multiplicity="1" />
+          <End Role="clients" Type="Self.clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="clients">
+              <PropertyRef Name="roleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_knife_colors">
+          <End Role="colors" Type="Self.colors" Multiplicity="0..1" />
+          <End Role="knife" Type="Self.knife" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="colors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="knife">
+              <PropertyRef Name="IdColor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_purchase_clients">
+          <End Role="clients" Type="Self.clients" Multiplicity="1" />
+          <End Role="purchase" Type="Self.purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="purchase">
+              <PropertyRef Name="clientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_purchase_colors">
+          <End Role="colors" Type="Self.colors" Multiplicity="1" />
+          <End Role="purchase" Type="Self.purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="colors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="purchase">
+              <PropertyRef Name="colorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище knivesModelContainer">
+          <EntitySet Name="clients" EntityType="Self.clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="colors" EntityType="Self.colors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="knife" EntityType="Self.knife" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="purchase" EntityType="Self.purchase" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="roles" EntityType="Self.roles" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_clients_roles" Association="Self.FK_clients_roles">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="clients" EntitySet="clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_knife_colors" Association="Self.FK_knife_colors">
+            <End Role="colors" EntitySet="colors" />
+            <End Role="knife" EntitySet="knife" />
+          </AssociationSet>
+          <AssociationSet Name="FK_purchase_clients" Association="Self.FK_purchase_clients">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="purchase" EntitySet="purchase" />
+          </AssociationSet>
+          <AssociationSet Name="FK_purchase_colors" Association="Self.FK_purchase_colors">
+            <End Role="colors" EntitySet="colors" />
+            <End Role="purchase" EntitySet="purchase" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="knivesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="roleId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="role" Relationship="Self.FK_clients_roles" FromRole="clients" ToRole="roles" />
+          <NavigationProperty Name="purchases" Relationship="Self.FK_purchase_clients" FromRole="clients" ToRole="purchase" />
+        </EntityType>
+        <EntityType Name="color">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="knives" Relationship="Self.FK_knife_colors" FromRole="colors" ToRole="knife" />
+          <NavigationProperty Name="purchases" Relationship="Self.FK_purchase_colors" FromRole="colors" ToRole="purchase" />
+        </EntityType>
+        <EntityType Name="knife">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IdColor" Type="Int32" />
+          <NavigationProperty Name="color" Relationship="Self.FK_knife_colors" FromRole="knife" ToRole="colors" />
+        </EntityType>
+        <EntityType Name="purchase">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="knifeId" Type="Int32" Nullable="false" />
+          <Property Name="clientId" Type="Int32" Nullable="false" />
+          <Property Name="colorId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="client" Relationship="Self.FK_purchase_clients" FromRole="purchase" ToRole="clients" />
+          <NavigationProperty Name="color" Relationship="Self.FK_purchase_colors" FromRole="purchase" ToRole="colors" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="clients" Relationship="Self.FK_clients_roles" FromRole="roles" ToRole="clients" />
+        </EntityType>
+        <Association Name="FK_clients_roles">
+          <End Role="roles" Type="Self.role" Multiplicity="1" />
+          <End Role="clients" Type="Self.client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="clients">
+              <PropertyRef Name="roleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_purchase_clients">
+          <End Role="clients" Type="Self.client" Multiplicity="1" />
+          <End Role="purchase" Type="Self.purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="purchase">
+              <PropertyRef Name="clientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_knife_colors">
+          <End Role="colors" Type="Self.color" Multiplicity="0..1" />
+          <End Role="knife" Type="Self.knife" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="colors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="knife">
+              <PropertyRef Name="IdColor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_purchase_colors">
+          <End Role="colors" Type="Self.color" Multiplicity="1" />
+          <End Role="purchase" Type="Self.purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="colors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="purchase">
+              <PropertyRef Name="colorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="knivesEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="clients" EntityType="Self.client" />
+          <EntitySet Name="colors" EntityType="Self.color" />
+          <EntitySet Name="knives" EntityType="Self.knife" />
+          <EntitySet Name="purchases" EntityType="Self.purchase" />
+          <EntitySet Name="roles" EntityType="Self.role" />
+          <AssociationSet Name="FK_clients_roles" Association="Self.FK_clients_roles">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="clients" EntitySet="clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_purchase_clients" Association="Self.FK_purchase_clients">
+            <End Role="clients" EntitySet="clients" />
+            <End Role="purchase" EntitySet="purchases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_knife_colors" Association="Self.FK_knife_colors">
+            <End Role="colors" EntitySet="colors" />
+            <End Role="knife" EntitySet="knives" />
+          </AssociationSet>
+          <AssociationSet Name="FK_purchase_colors" Association="Self.FK_purchase_colors">
+            <End Role="colors" EntitySet="colors" />
+            <End Role="purchase" EntitySet="purchases" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище knivesModelContainer" CdmEntityContainer="knivesEntities1">
+          <EntitySetMapping Name="clients">
+            <EntityTypeMapping TypeName="knivesModel.client">
+              <MappingFragment StoreEntitySet="clients">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="roleId" ColumnName="roleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="colors">
+            <EntityTypeMapping TypeName="knivesModel.color">
+              <MappingFragment StoreEntitySet="colors">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="knives">
+            <EntityTypeMapping TypeName="knivesModel.knife">
+              <MappingFragment StoreEntitySet="knife">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="IdColor" ColumnName="IdColor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="purchases">
+            <EntityTypeMapping TypeName="knivesModel.purchase">
+              <MappingFragment StoreEntitySet="purchase">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="knifeId" ColumnName="knifeId" />
+                <ScalarProperty Name="clientId" ColumnName="clientId" />
+                <ScalarProperty Name="colorId" ColumnName="colorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="roles">
+            <EntityTypeMapping TypeName="knivesModel.role">
+              <MappingFragment StoreEntitySet="roles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

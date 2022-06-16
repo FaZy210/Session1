@@ -1,0 +1,28 @@
+﻿<Page x:Class="demik3.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:demik3"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="1200"
+      Title="MainPage">
+
+    <Grid Background="GhostWhite">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="49*"/>
+            <RowDefinition Height="322*"/>
+            <RowDefinition Height="29*"/>
+        </Grid.RowDefinitions>
+        <Grid Background="GreenYellow"></Grid>
+        <Image Source="/Resources/logoong.png" HorizontalAlignment="Left"></Image>
+        <TextBlock Text="DemoCompany" FontSize="60" HorizontalAlignment="Center"></TextBlock>
+        <Button x:Name="BackButton" Content="Назад" FontSize="30" Style="{DynamicResource RadioButton}" Background="LightBlue" Margin="892,10,10,10" Click="BackButton_Click" ></Button>
+        <Grid Background="GreenYellow" Grid.Row="2"></Grid>
+        <Button x:Name="ListButton" Click="ListButton_Click" Background="LightBlue" Content="Просмотр" FontSize="30" Style="{DynamicResource RadioButton}" Grid.Row="1" Margin="172,160,626,362"></Button>
+        <Button Click="RedactDeletePageButton_Click" x:Name="RedactDeletePageButton" Background="LightBlue" Content="Редакт делит" FontSize="30" Style="{DynamicResource RadioButton}" Grid.Row="1" Margin="664,160,134,362"></Button>
+        <Button x:Name="AddButton" Click="AddButton_Click" Background="LightBlue" Content="Добавить" FontSize="30" Style="{DynamicResource RadioButton}" Grid.Row="1" Margin="664,392,134,132"/>
+        <Button Background="LightBlue" Content="Войти" FontSize="30" Style="{DynamicResource RadioButton}" Grid.Row="1" Margin="172,392,626,132"/>
+        <Frame x:Name="SecondaryFrame" Grid.Row="1"></Frame>
+    </Grid>
+</Page>

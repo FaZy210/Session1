@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="knivesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="client">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="roleId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="role" Relationship="Self.FK_clients_roles" FromRole="clients" ToRole="roles" />
+    <NavigationProperty Name="purchases" Relationship="Self.FK_purchase_clients" FromRole="clients" ToRole="purchase" />
+  </EntityType>
+  <EntityType Name="color">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="knives" Relationship="Self.FK_knife_colors" FromRole="colors" ToRole="knife" />
+    <NavigationProperty Name="purchases" Relationship="Self.FK_purchase_colors" FromRole="colors" ToRole="purchase" />
+  </EntityType>
+  <EntityType Name="knife">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Image" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="IdColor" Type="Int32" />
+    <NavigationProperty Name="color" Relationship="Self.FK_knife_colors" FromRole="knife" ToRole="colors" />
+  </EntityType>
+  <EntityType Name="purchase">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="knifeId" Type="Int32" Nullable="false" />
+    <Property Name="clientId" Type="Int32" Nullable="false" />
+    <Property Name="colorId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="client" Relationship="Self.FK_purchase_clients" FromRole="purchase" ToRole="clients" />
+    <NavigationProperty Name="color" Relationship="Self.FK_purchase_colors" FromRole="purchase" ToRole="colors" />
+  </EntityType>
+  <EntityType Name="role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="clients" Relationship="Self.FK_clients_roles" FromRole="roles" ToRole="clients" />
+  </EntityType>
+  <Association Name="FK_clients_roles">
+    <End Role="roles" Type="Self.role" Multiplicity="1" />
+    <End Role="clients" Type="Self.client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="roles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="clients">
+        <PropertyRef Name="roleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_purchase_clients">
+    <End Role="clients" Type="Self.client" Multiplicity="1" />
+    <End Role="purchase" Type="Self.purchase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="clients">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="purchase">
+        <PropertyRef Name="clientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_knife_colors">
+    <End Role="colors" Type="Self.color" Multiplicity="0..1" />
+    <End Role="knife" Type="Self.knife" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="colors">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="knife">
+        <PropertyRef Name="IdColor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_purchase_colors">
+    <End Role="colors" Type="Self.color" Multiplicity="1" />
+    <End Role="purchase" Type="Self.purchase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="colors">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="purchase">
+        <PropertyRef Name="colorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="knivesEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="clients" EntityType="Self.client" />
+    <EntitySet Name="colors" EntityType="Self.color" />
+    <EntitySet Name="knives" EntityType="Self.knife" />
+    <EntitySet Name="purchases" EntityType="Self.purchase" />
+    <EntitySet Name="roles" EntityType="Self.role" />
+    <AssociationSet Name="FK_clients_roles" Association="Self.FK_clients_roles">
+      <End Role="roles" EntitySet="roles" />
+      <End Role="clients" EntitySet="clients" />
+    </AssociationSet>
+    <AssociationSet Name="FK_purchase_clients" Association="Self.FK_purchase_clients">
+      <End Role="clients" EntitySet="clients" />
+      <End Role="purchase" EntitySet="purchases" />
+    </AssociationSet>
+    <AssociationSet Name="FK_knife_colors" Association="Self.FK_knife_colors">
+      <End Role="colors" EntitySet="colors" />
+      <End Role="knife" EntitySet="knives" />
+    </AssociationSet>
+    <AssociationSet Name="FK_purchase_colors" Association="Self.FK_purchase_colors">
+      <End Role="colors" EntitySet="colors" />
+      <End Role="purchase" EntitySet="purchases" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
